@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\CurrencyController as ApiCurrencyController;
+use App\Http\Controllers\Api\PairController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\CurrencyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +18,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/user', fn(Request $request) => $request->user());
+    Route::post("logout", [UserController::class, 'logout']);
 });
+
+Route::post("login", [UserController::class, 'login']);
+Route::post("register", [UserController::class, 'register']);
+Route::apiResource('pairs', PairController::class);
+Route::apiResource('currencies', CurrencyController::class);
+Route::post('/convert', [PairController::class, 'convert']);
+
