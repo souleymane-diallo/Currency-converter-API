@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Currency;
 use App\Models\Pair;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Collection;
@@ -41,6 +42,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        User::factory()->create([
+            'name' => 'Philippe',
+            'email' => 'philippe@gmail.com',
+         ]);
+         
         (new Collection(self::Currencies))
             ->when(! App::environment('testing'), fn($currencies) => $currencies
                 ->each(fn ($currency) => Currency::create($currency)));
