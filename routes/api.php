@@ -27,5 +27,5 @@ Route::post("login", [UserController::class, 'login']);
 Route::post("register", [UserController::class, 'register']);
 Route::apiResource('pairs', PairController::class);
 Route::apiResource('currencies', CurrencyController::class);
-Route::post('/convert', [PairController::class, 'convert']);
+Route::get('/convert/{currency_from}/{currency_to}/{amount}/{invert?}', [PairController::class, 'convert']);
 

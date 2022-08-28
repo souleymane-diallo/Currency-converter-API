@@ -21,5 +21,9 @@ class Pair extends Model
         return $this->belongsTo(Currency::class, 'to_id');
     }
 
+    public function conversion()
+    {
+        return $this->hasOne(Conversion::class);
+    }
 
 }
